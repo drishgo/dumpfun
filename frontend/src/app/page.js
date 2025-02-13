@@ -1,131 +1,206 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Rocket, BarChart2, Wallet, TrendingUp, Search } from "lucide-react";
-import { useTheme } from "next-themes";
-import { TextAnimate } from "@/components/magicui/text-animate";
-import { LineShadowText } from "@/components/magicui/line-shadow-text";
-import { AuroraText } from "@/components/magicui/aurora-text";
-import { Meteors } from "@/components/magicui/meteors";
-import { useEffect, useState } from "react";
-import { Particles } from "@/components/magicui/particles";
-import { Router } from "next/router";
-import { useRouter } from "next/navigation";
-import { RainbowButton } from "@/components/magicui/rainbow-button";
+
+import { motion } from "framer-motion";
+import { Playfair_Display} from "next/font/google";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { AnimatedGridPattern } from "@/components/magicui/animated-grid-pattern";
+import { RainbowButton } from "@/components/magicui/rainbow-button";
+import { MorphingText } from "@/components/magicui/morphing-text";
+import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 
-export default function Home() {
-  
-  const theme = useTheme();
-  const shadowColor = theme.resolvedTheme === "dark" ? "white" : "white";
-  //PARTICLE
-  
-  const { resolvedTheme } = useTheme();
-  const [color, setColor] = useState("#a773fa");
-  useEffect(() => {
-    setColor(resolvedTheme === "dark" ? "#ffffff" : "#a773fa");
-  }, [resolvedTheme]);
-  const router = useRouter();
-  const handleCreateTokenClick = ()=>{
-    router.push("/createToken");
-  }
+const texts = [
+  "नमस्ते",    // Hindi
+  "Welcome",   // English
+  "Willkommen",// German
+  "欢迎",       // Chinese
+  "ようこそ",   // Japanese
+  "환영합니다",  // Korean
+  "ברוך הבא"    // Hebrew
+];
+
+
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-pacifico",
+});
+
+function ElegantShape({
+  className,
+  delay = 0,
+  width = 400,
+  height = 100,
+  rotate = 0,
+  gradient = "from-white/[0.08]",
+}) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-      
-  
-      {/* Navbar */}
-      <nav className="flex justify-between items-center p-6 border-b border-gray-700">
-        <div className="text-2xl font-bold">Dump.fun</div>
-        <div className="flex space-x-4">
-          <Button variant="ghost">Docs</Button>
-          <Button variant="ghost">Community</Button>
-          <Button>Launch App</Button>
-        </div>
-      </nav>
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: -150,
+        rotate: rotate - 15,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        rotate: rotate,
+      }}
+      transition={{
+        duration: 2.4,
+        delay,
+        ease: [0.23, 0.86, 0.39, 0.96],
+        opacity: { duration: 1.2 },
+      }}
+      className={cn("absolute", className)}
+    >
+      <motion.div
+        animate={{
+          y: [0, 15, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+        style={{
+          width,
+          height,
+        }}
+        className="relative"
+      >
+        <div
+          className={cn(
+            "absolute inset-0 rounded-full",
+            "bg-gradient-to-r to-transparent",
+            gradient,
+            "backdrop-blur-[2px] border-2 border-white/[0.15]",
+            "shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
+            "after:absolute after:inset-0 after:rounded-full",
+            "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]"
+          )}
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
 
-      {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center text-center py-20 px-4">
-      
-      <h1 className="text-balance text-5xl font-semibold leading-none tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl">
-      The Easiest way to <br></br>
-      <LineShadowText className="italic" shadowColor={shadowColor}>
-        Launch  
-      </LineShadowText>
-         <> </>your own token.
-      
-      </h1>
-      <br></br>
-        
+export default function HeroGeometric({ badge = "Kokonut UI", title1 = "Elevate Your", title2 = "Digital Vision" }) {
+  const fadeUpVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        delay: 0.5 + i * 0.2,
+        ease: [0.25, 0.4, 0.25, 1],
+      },
+    }),
+  };
+
+  return (
+    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#050314]">
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
+
+      <div className="absolute inset-0 overflow-hidden">
+        <ElegantShape
+          delay={0.3}
+          width={600}
+          height={140}
+          rotate={12}
+          gradient="from-indigo-500/[0.15]"
+          className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
+        />
+
+        <ElegantShape
+          delay={0.5}
+          width={500}
+          height={120}
+          rotate={-15}
+          gradient="from-rose-500/[0.15]"
+          className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
+        />
+
+        <ElegantShape
+          delay={0.4}
+          width={300}
+          height={80}
+          rotate={-8}
+          gradient="from-violet-500/[0.15]"
+          className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
+        />
+
+        <ElegantShape
+          delay={0.6}
+          width={200}
+          height={60}
+          rotate={20}
+          gradient="from-amber-500/[0.15]"
+          className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
+        />
+
+        <ElegantShape
+          delay={0.7}
+          width={150}
+          height={40}
+          rotate={-25}
+          gradient="from-cyan-500/[0.15]"
+          className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
+        />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 md:px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.div
+            custom={0}
+            variants={fadeUpVariants}
+            initial="hidden"
+            animate="visible"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8 md:mb-12"
+          >
+           
+            <span className="text-sm text-white/60 tracking-wide"><Link href="https://x.com/realdrishtant">x</Link></span>
+          </motion.div>
+
+          <motion.div custom={1} variants={fadeUpVariants} initial="hidden" animate="visible">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tight">
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80"><Link href="/createToken" ><span
+                className={cn(
+                  "bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300 ",
+                  playfair.className
+                )}
+              >
+                Dump.fun
+              </span></Link></span>
+              <br />
+              
+              <span
+                className={cn(
+                  "bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300 ",
+                  playfair.className
+                )}
+              >
+                <MorphingText className="text-white p-3"texts={texts}/>
+              </span>
+            </h1>
+          </motion.div>
+
+          <motion.div custom={2} variants={fadeUpVariants} initial="hidden" animate="visible">
+            
+            <p className={cn(
+                  "font-thin font-mono text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4"
+                )}>
+              Create your own meme tokens on the ethereum blockchain. No code required.
+            </p>
+          </motion.div>
+          <Link href="/createToken"><InteractiveHoverButton className="font-mono">Launch Token</InteractiveHoverButton></Link>
+        </div>
        
-        <div className="flex space-x-4">
-          <Input placeholder="Enter token address" className="w-96" />
-          <Button className="bg-purple-600 hover:bg-purple-700" >Search</Button>
-        </div>
-        <br/>
-        <br/>
+      </div>
 
-        <Link href="/createToken"><RainbowButton >Create new Token</RainbowButton></Link>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          
-        
-          <Card>
-            <CardHeader>
-              <Rocket className="w-8 h-8 mb-4 text-purple-400" />
-              <CardTitle>Instant Launch</CardTitle>
-              <CardDescription>Launch your token in seconds with no coding required.</CardDescription>
-            </CardHeader>
-          </Card>
-          <Card>
-            <CardHeader>
-              <BarChart2 className="w-8 h-8 mb-4 text-purple-400" />
-              <CardTitle>Real-Time Analytics</CardTitle>
-              <CardDescription>Track your token's performance with live analytics.</CardDescription>
-            </CardHeader>
-          </Card>
-          <Card>
-            <CardHeader>
-              <Wallet className="w-8 h-8 mb-4 text-purple-400" />
-              <CardTitle>Secure Wallet</CardTitle>
-              <CardDescription>Integrated wallet support for seamless transactions.</CardDescription>
-            </CardHeader>
-          </Card>
-          <Card>
-            <CardHeader>
-              <TrendingUp className="w-8 h-8 mb-4 text-purple-400" />
-              <CardTitle>Market Insights</CardTitle>
-              <CardDescription>Get insights into the latest market trends.</CardDescription>
-            </CardHeader>
-          </Card>
-        </div>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="flex flex-col items-center justify-center text-center py-20 px-4 bg-gray-800">
-        <h2 className="text-4xl font-bold mb-4">Ready to Launch Your Token?</h2>
-        <p className="text-xl text-gray-300 mb-8">
-          Join thousands of creators and start your journey today.
-        </p>
-        <Button className="bg-purple-600 hover:bg-purple-700">Get Started</Button>
-      </section>
-
-      {/* Footer */}
-      <footer className="p-6 border-t border-gray-700 text-center">
-        <p className="text-gray-400">© 2023 PumpClone. All rights reserved.</p>
-      </footer>
-      
-      <AnimatedGridPattern
-        numSquares={30}
-        maxOpacity={0.1}
-        duration={3}
-        repeatDelay={1}
-        className="z-10"
-      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" />
     </div>
   );
 }
