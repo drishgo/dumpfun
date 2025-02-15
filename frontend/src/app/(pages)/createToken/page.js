@@ -5,6 +5,33 @@ import { Pacifico } from "next/font/google";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Label } from "@radix-ui/react-label";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Button } from "@/components/ui/button";
+import { AuroraText } from "@/components/magicui/aurora-text";
+import { BorderBeam } from "@/components/magicui/border-beam";
+import { RetroGrid } from "@/components/magicui/retro-grid";
+
+import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+import { RippleButton } from "@/components/magicui/ripple-button";
+
+
+
 const pacifico = Pacifico({
   subsets: ["latin"],
   weight: ["400"],
@@ -39,6 +66,7 @@ function ElegantShape({
       }}
       className={cn("absolute", className)}
     >
+      
       <motion.div
         animate={{
           y: [0, 15, 0],
@@ -85,88 +113,79 @@ export default function HeroGeometric({ badge = "Kokonut UI", title1 = "Elevate 
   };
 
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303]">
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
+    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#050314]">
+      <RetroGrid opacity={0.16} angle={15} className="bg-blend-darken"></RetroGrid>
+ 
 
-      <div className="absolute inset-0 overflow-hidden">
-        <ElegantShape
-          delay={0.3}
-          width={600}
-          height={140}
-          rotate={12}
-          gradient="from-indigo-500/[0.15]"
-          className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
-        />
-
-        <ElegantShape
-          delay={0.5}
-          width={500}
-          height={120}
-          rotate={-15}
-          gradient="from-rose-500/[0.15]"
-          className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
-        />
-
-        <ElegantShape
-          delay={0.4}
-          width={300}
-          height={80}
-          rotate={-8}
-          gradient="from-violet-500/[0.15]"
-          className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
-        />
-
-        <ElegantShape
-          delay={0.6}
-          width={200}
-          height={60}
-          rotate={20}
-          gradient="from-amber-500/[0.15]"
-          className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
-        />
-
-        <ElegantShape
-          delay={0.7}
-          width={150}
-          height={40}
-          rotate={-25}
-          gradient="from-cyan-500/[0.15]"
-          className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
-        />
-      </div>
-
-      <div className="relative z-10 container mx-auto px-4 md:px-6">
+      <div className="relative flex-auto z-10 container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center">
+        {/* <motion.div custom={1} variants={fadeUpVariants} initial="hidden" animate="visible">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tight">
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80"><AuroraText>Create Token</AuroraText></span>
+            </h1>
+          </motion.div> */}
           <motion.div
             custom={0}
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8 md:mb-12"
+            className="inline-flex items-center gap-2 "
           >
-            <Image src="https://kokonutui.com/logo.svg" alt="Kokonut UI" width={20} height={20} />
-            <span className="text-sm text-white/60 tracking-wide">{badge}</span>
+          
+          <div className="flex h-full w-full font-mono">
+  <Card className="relative max-w-2xl w-full mx-4 overflow-hidden bg-[#0a081a]/90 backdrop-blur-2xl border-transparent shadow-xl">
+    <CardHeader className="px-8 pt-8">
+      <CardTitle className="text-center">
+        
+      </CardTitle>
+      
+    </CardHeader>
+    <CardContent className="px-8 pb-6">
+      <form>
+        <div className="grid w-full items-center gap-6">
+          <div className="flex flex-col space-y-3">
+            <Label className="text-white/80" htmlFor="tokenName">Token Name</Label>
+            <Input 
+              id="tokenName" 
+              type="text" 
+              placeholder="Enter token name"
+              className="bg-white/5 border-white/20 text-white placeholder:text-white/50"
+            />
+          </div>
+          <div className="flex flex-col space-y-3">
+            <Label className="text-white/80" htmlFor="tokenSymbol">Token Symbol</Label>
+            <Input
+              id="tokenSymbol"
+              type="text"
+              placeholder="Enter token symbol (e.g. BTC)"
+              className="bg-white/5 border-white/20 text-white placeholder:text-white/50"
+            />
+          </div>
+          <div className="flex flex-col space-y-3">
+            <Label className="text-white/80" htmlFor="supply">Total Supply</Label>
+            <Input
+              id="supply"
+              type="number"
+              placeholder="Enter total supply"
+              className="bg-white/5 border-white/20 text-white placeholder:text-white/50"
+            />
+          </div>
+        </div>
+      </form>
+    </CardContent>
+    <CardFooter className="flex justify-center pb-8">
+      <RippleButton className="bg-white/5 border-transparent text-white font-mono" >Create</RippleButton>
+    </CardFooter>
+    <BorderBeam duration={5} size={100} />
+    <BorderBeam duration={10} size={100} />
+  </Card>
+</div>
           </motion.div>
 
-          <motion.div custom={1} variants={fadeUpVariants} initial="hidden" animate="visible">
-            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">{title1}</span>
-              <br />
-              <span
-                className={cn(
-                  "bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300 ",
-                  pacifico.className
-                )}
-              >
-                {title2}
-              </span>
-            </h1>
-          </motion.div>
+     
 
           <motion.div custom={2} variants={fadeUpVariants} initial="hidden" animate="visible">
-            <p className="text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
-              Crafting exceptional digital experiences through innovative design and cutting-edge technology.
-            </p>
+
           </motion.div>
         </div>
       </div>

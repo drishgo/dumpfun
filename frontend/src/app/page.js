@@ -8,6 +8,8 @@ import Link from "next/link";
 import { RainbowButton } from "@/components/magicui/rainbow-button";
 import { MorphingText } from "@/components/magicui/morphing-text";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+import Footer from "@/components/Footer";
+import { WordRotate } from "@/components/magicui/word-rotate";
 
 const texts = [
   "नमस्ते",    // Hindi
@@ -24,7 +26,7 @@ const texts = [
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400"],
-  variable: "--font-pacifico",
+  variable: "--font-playfair",
 });
 
 function ElegantShape({
@@ -101,7 +103,9 @@ export default function HeroGeometric({ badge = "Kokonut UI", title1 = "Elevate 
   };
 
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#050314]">
+    <>
+    <section>
+    <div className="relative min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#050314]">
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
       <div className="absolute inset-0 overflow-hidden">
@@ -174,8 +178,8 @@ export default function HeroGeometric({ badge = "Kokonut UI", title1 = "Elevate 
               >
                 Dump.fun
               </span></Link></span>
-              <br />
-              
+              <br /> </h1>
+              <h3>
               <span
                 className={cn(
                   "bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300 ",
@@ -184,23 +188,55 @@ export default function HeroGeometric({ badge = "Kokonut UI", title1 = "Elevate 
               >
                 <MorphingText className="text-white p-3"texts={texts}/>
               </span>
-            </h1>
+            </h3>
           </motion.div>
+          <br/>
 
           <motion.div custom={2} variants={fadeUpVariants} initial="hidden" animate="visible">
             
             <p className={cn(
-                  "font-thin font-mono text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4"
+                  " font-mono text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4"
                 )}>
-              Create your own meme tokens on the ethereum blockchain. No code required.
+              Create your own meme tokens on the Ethereum blockchain. No code required.
             </p>
           </motion.div>
-          <Link href="/createToken"><InteractiveHoverButton className="font-mono">Launch Token</InteractiveHoverButton></Link>
+          
+          <motion.div
+            custom={0}
+            variants={fadeUpVariants}
+            initial="hidden"
+            animate="visible"
+           
+          >
+           <Link href="/createToken"><InteractiveHoverButton className="font-mono">Launch Token</InteractiveHoverButton></Link>
+          </motion.div>
+          <br/>
+          <hr/>
+          <br/>
+          
+          <motion.div
+            custom={0}
+            variants={fadeUpVariants}
+            initial="hidden"
+            animate="visible"
+           
+          >
+             <WordRotate
+      className="text-4xl font-bold text-white dark:text-white font-mono"
+      words={["Meme coins.", "AI Agents."]}
+    />
+          </motion.div>
+          
         </div>
        
       </div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" />
+      
     </div>
+    </section>
+    <hr/>
+    <Footer className="relative"></Footer>
+    </>
   );
 }
