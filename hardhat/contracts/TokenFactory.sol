@@ -165,6 +165,7 @@ contract TokenFactory is Ownable {
    
     SafeTransferLib.safeTransferETH(msg.sender, ethToRefund);
 }
+//new to impl in later vers
 function getSellProceeds(address memeTokenAddress, uint256 tokenAmount) public view returns (uint256) {
     memeToken memory tokenInfo = addressToMemeTokenMapping[memeTokenAddress];
     require(tokenInfo.tokenAddress != address(0), "Token does not exist");
@@ -175,6 +176,7 @@ function getSellProceeds(address memeTokenAddress, uint256 tokenAmount) public v
 
     return costCalculation(currentSupplyScaled - tokenAmount, tokenAmount);
 }
+//might throw overflow error sometimes idk how to resolve [RAISE ISSUE 1]
     function costCalculation(uint256 currentSupply, uint256 totalSupply) public pure returns(uint){
            require(currentSupply + totalSupply <= MAX_SUPPLY, "Supply exceeds maximum limit");
 
