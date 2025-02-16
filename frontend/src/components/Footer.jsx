@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-lg font-semibold mb-4">Drishgo</h3>
-            <p className="text-gray-400">Building the future of Discord bots, one click at a time.</p>
+            
           </div>
     
           <div>

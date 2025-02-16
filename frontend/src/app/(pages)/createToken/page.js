@@ -29,6 +29,7 @@ import { RetroGrid } from "@/components/magicui/retro-grid";
 
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { RippleButton } from "@/components/magicui/ripple-button";
+import { ShineBorder } from "@/components/magicui/shine-border";
 
 
 
@@ -114,10 +115,10 @@ export default function HeroGeometric({ badge = "Kokonut UI", title1 = "Elevate 
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#050314]">
-      <RetroGrid opacity={0.16} angle={15} className="bg-blend-darken"></RetroGrid>
+      <RetroGrid opacity={0.2} angle={45} className="bg-blend-darken"></RetroGrid>
  
 
-      <div className="relative flex-auto z-10 container mx-auto px-4 md:px-6">
+      <div className="relative flex-auto z-10 container mx-2 px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center">
         {/* <motion.div custom={1} variants={fadeUpVariants} initial="hidden" animate="visible">
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tight">
@@ -131,14 +132,13 @@ export default function HeroGeometric({ badge = "Kokonut UI", title1 = "Elevate 
             animate="visible"
             className="inline-flex items-center gap-2 "
           >
-          
-          <div className="flex h-full w-full font-mono">
-  <Card className="relative max-w-2xl w-full mx-4 overflow-hidden bg-[#0a081a]/90 backdrop-blur-2xl border-transparent shadow-xl">
+                      <div className=" h-full w-full font-mono">
+  <Card className="relative max-w-2xl w-full mx-4 overflow-hidden bg-[#0a081a]/90 backdrop-blur-2xl border-transparent shadow-xl text-lg font-bold">
     <CardHeader className="px-8 pt-8">
-      <CardTitle className="text-center">
-        
+      <CardTitle className="text-center text-white text-4xl">
+        Create Token
       </CardTitle>
-      
+      <hr></hr>
     </CardHeader>
     <CardContent className="px-8 pb-6">
       <form>
@@ -153,7 +153,7 @@ export default function HeroGeometric({ badge = "Kokonut UI", title1 = "Elevate 
             />
           </div>
           <div className="flex flex-col space-y-3">
-            <Label className="text-white/80" htmlFor="tokenSymbol">Token Symbol</Label>
+            <Label className="text-white/80 " htmlFor="tokenSymbol">Token Symbol</Label>
             <Input
               id="tokenSymbol"
               type="text"
@@ -174,19 +174,17 @@ export default function HeroGeometric({ badge = "Kokonut UI", title1 = "Elevate 
       </form>
     </CardContent>
     <CardFooter className="flex justify-center pb-8">
-      <RippleButton className="bg-white/5 border-transparent text-white font-mono" >Create</RippleButton>
+      <RippleButton rippleColor="white" className="bg-white/5 border-transparent text-white font-mono" >Create</RippleButton>
     </CardFooter>
     <BorderBeam duration={5} size={100} />
     <BorderBeam duration={10} size={100} />
   </Card>
 </div>
+
           </motion.div>
 
      
-
-          <motion.div custom={2} variants={fadeUpVariants} initial="hidden" animate="visible">
-
-          </motion.div>
+         
         </div>
       </div>
 

@@ -43,10 +43,10 @@ const playfair = Playfair_Display({
 function ElegantShape({
   className,
   delay = 0,
-  width = 400,
+  width = 600,
   height = 100,
   rotate = 0,
-  gradient = "from-white/[0.08]",
+  gradient = "from-black/[0.08]",
 }) {
   return (
     <motion.div
@@ -99,40 +99,8 @@ function ElegantShape({
   );
 }
 
-export default function HeroGeometric({ badge = "Kokonut UI", title1 = "Elevate Your", title2 = "Digital Vision" }) {
-  const [cards,setCard]= useState([]);
-const [loading,setLoading] = useState(true);
-const [searchTerm,setSearchTerm] = useState('');
+export default function HeroGeometric() {
 
-useEffect(()=>{
-  const fetchToken = async () =>{
-    try{
-      const provider = new ethers.JsonRpcProvider(process.env.ETH_RPC_URL);
-    console.log(provider)
-    const contract = new ethers.Contract(process.env.ETH_TESTNET_CONTRACT_ADDRESS,abi,provider);
-    const tokens = await contract.getAllMemeTokens();
-
-    setCard(
-      tokens.map(token=>({
-        name:token.name,
-        symbol: token.symbol,
-        description: token.description,
-        tokenImageUrl: token.tokenImageUrl,
-        fundingRaised: ethers.formatEther(token.fundingRaised,'ether'),
-        tokenAddress: token.tokenAddress,
-       creatorAddress: token.creatorAddress,
-      }))
-    );
-    
-    
-    }catch(error){
-      console.log(error)
-    }finally{
-      setLoading(false)
-    }
-  }
-  fetchToken();
-},[]);
 const handleSearch= ()=> {
   console.log("Searching for: ",searchTerm);
 }
@@ -154,8 +122,8 @@ const handleSearch= ()=> {
   return (
     <>
     <section>
-    <div className="relative min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#050314]">
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
+    <div className="relative min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#c01d00d2]">
+      <div className="absolute inset-0 bg-gradient-to-br from-red-900/[0.05] via-transparent to-black/[0.05] blur-3xl" />
 
       <div className="absolute inset-0 overflow-hidden">
         <ElegantShape
@@ -205,21 +173,11 @@ const handleSearch= ()=> {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            custom={0}
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8 md:mb-12"
-          >
-           
-            <span className="text-sm text-white/60 tracking-wide"><Link href="https://x.com/realdrishtant">x</Link></span>
-          </motion.div>
-
+        <div className="max-w-3xl mx-auto my-96 text-center">
+        
           <motion.div custom={1} variants={fadeUpVariants} initial="hidden" animate="visible">
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80"><Link href="/createToken" ><span
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80"><Link href="/" ><span
                 className={cn(
                   "bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300 ",
                   playfair.className
@@ -228,87 +186,26 @@ const handleSearch= ()=> {
                 Dump.fun
               </span></Link></span>
                </h1>
-               <hr className=""/>
-              <h3>
-              <span
-                className={cn(
-                  "bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300 ",
-                  playfair.className
-                )}
-              >
-                <MorphingText className="text-white p-3 my-5"texts={texts}/>
-              </span>
-            </h3>
+              
+           
           </motion.div>
           
 
           <motion.div custom={2} variants={fadeUpVariants} initial="hidden" animate="visible">
             
             <p className={cn(
-                  " font-mono text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto my-0.5 px-4"
+                  " font-mono text-base sm:text-lg md:text-xl text-white mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto my-0.5 px-4"
                 )}>
-              Create your own meme tokens on the Ethereum blockchain. No code required.
+              All and every transactions made on this platform are the sole responsibility of the party making the transactions, and every party carrying out transactions are aware of the risks that are carried with the platform. 
+              The platform or its beneficiaries are NOT liable for the financial losses or gains made by the user.  
             </p>
           </motion.div>
           
-          <motion.div
-            custom={0}
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-           
-          >
-           <Link href="/createToken"><InteractiveHoverButton className="font-mono my-5">Launch Token</InteractiveHoverButton></Link>
-          </motion.div>
     
           
-          <motion.div
-            custom={0}
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-           
-          >
-            <div className="text-center">
-          <Input
-            type="text"
-            className="text-white gap-8"
-            placeholder="search for token"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
           
-          <Button className="p-3 m-6 " onClick={handleSearch}>Search</Button>
-        </div>
-          </motion.div>
-        
           
-        {loading ? (
-          <p className="text-white font-mono">Loading...</p>
-        ) : (
-          <div className="card-list">
-    
-            {cards.slice(1).map((card, index) => (
-              <div key={index} className="card" onClick={() => navigateToTokenDetail(card)}>
-               <Card>
-               <div className="card-content">
-                  <CardHeader>
-                  <img src={card.tokenImageUrl} alt={card.name} className="card-image"/>
-                  </CardHeader>
-                  <div className="card-text">
-                 <CardContent>
-                 <h2>Created by {card.creatorAddress}</h2>
-                    <p>Funding Raised: {card.fundingRaised} ETH</p>
-                    <p>{card.name} (ticker: {card.symbol})</p>
-                    <p>{card.description}</p>
-                 </CardContent>
-                  </div>
-                </div>
-               </Card>
-              </div>
-            ))}
-          </div>
-        )}
+          
           
         </div>
         
